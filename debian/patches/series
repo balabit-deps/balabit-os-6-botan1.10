@@ -1,0 +1,4 @@
+add-mips64-mipsn32-support.diff
+add-powerpc64le-support.diff
+add-arm64-support.patch.diff
+add-or1k-support.diff

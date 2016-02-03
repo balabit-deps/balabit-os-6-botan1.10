@@ -1,0 +1,736 @@
+botan1.10 (1.10.12-1) unstable; urgency=medium
+
+  * Update a final symbols file prepared using pkgkde-symbolshelper
+    batchpatch
+  * Imported Upstream version 1.10.11
+  * Imported Upstream version 1.10.12
+  * Relax symbols check (for now)
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 03 Feb 2016 12:02:22 +0100
+
+botan1.10 (1.10.10-6) unstable; urgency=medium
+
+  * Use pkgkde-symbolshelper to maintain a single symbols file (that needs
+    to be updated after, so we don't fail at all)
+  * Install docs for libbotan-1.10-1
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 18 Aug 2015 18:14:44 +0200
+
+botan1.10 (1.10.10-5) unstable; urgency=medium
+
+  * Add starting symbols file for all supported architectures and lower
+    the checking level of dpkg-gensymbols to 1 to allow first run to
+    succeed
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 18 Aug 2015 15:30:29 +0200
+
+botan1.10 (1.10.10-4) unstable; urgency=medium
+
+  * Update amd64 symbols to match the current version
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 18 Aug 2015 14:57:48 +0200
+
+botan1.10 (1.10.10-3) unstable; urgency=medium
+
+  * Make the symbols tied to the architecture, so we don't have to have
+    hundreds of arch= tags in symbols file (Closes: #795888)
+  * Add i386 symbols file for libbotan-1.10-1 package in addition to amd64
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 18 Aug 2015 13:24:37 +0200
+
+botan1.10 (1.10.10-2) unstable; urgency=medium
+
+  * Update symbols with any-amd64 for for amd64 specific symbols
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 17 Aug 2015 17:52:18 +0200
+
+botan1.10 (1.10.10-1) unstable; urgency=medium
+
+  * Imported Upstream version 1.10.10
+  * Add symbols file for libbotan-1.10-0v5 library
+  * Rebuild with gcc-5 and libstdc++6 (Closes: #790987)
+  * Add DPKG_GENSYMBOLS_CHECK_LEVEL=4 to d/rules
+  * Upstream bumped SOVERSION to 1, so rename the shared library package
+    to libbotan-1.10-1
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 17 Aug 2015 11:46:43 +0200
+
+botan1.10 (1.10.8-2) unstable; urgency=medium
+
+  * Add ppc64el and arm64 support (Closes: #741691)
+  * Add support for or1k (Closes: #749267)
+  * Use correct Vcs-* links
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 25 Aug 2014 10:49:33 +0200
+
+botan1.10 (1.10.8-1) unstable; urgency=medium
+
+  * New upstream version 1.10.8
+  * Use debhelper 9 (dpkg-buildflags) instead of hardening-wrapper
+  * Update watch file to look for v.1.10.x
+  * Update patches for 1.10.8 release
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 30 Jun 2014 10:09:50 +0200
+
+botan1.10 (1.10.5-2) unstable; urgency=low
+
+  * Add support MIPS64(el) and MIPSN32(el) (Closes: #726128)
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 14 Oct 2013 11:34:13 +0200
+
+botan1.10 (1.10.5-1) unstable; urgency=low
+
+  * Imported Upstream version 1.10.4
+   + Avoid a conditional operation in the power mod implementations on if
+     a nibble of the exponent was zero or not. This may help protect
+     against certain forms of side channel attacks.
+   + The SRP6 code was checking for invalid values as specified in RFC
+     5054, specifically values equal to zero mod p. However SRP would
+     accept negative A/B values, or ones larger than p, neither of which
+     should occur in a normal run of the protocol. These values are now
+     rejected. Credits to Timothy Prepscius for pointing out these values
+     are not normally used and probably signal something fishy.
+   + The return value of version_string is now a compile time constant
+     string, so version information can be more easily extracted from
+     binaries.
+  * Imported Upstream version 1.10.5
+   + A potential crash in the AES-NI implementation of the AES-192 key
+     schedule (caused by misaligned loads) has been fixed.
+   + A previously conditional operation in Montgomery multiplication and
+     squaring is now always performed, removing a possible timing channel.
+   + Use correct flags for creating a shared library on OS X under Clang.
+   + Fix a compile time incompatibility with Visual C++ 2012.
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 04 Mar 2013 09:24:12 +0100
+
+botan1.10 (1.10.3-1) unstable; urgency=high
+
+  * Imported Upstream version 1.10.3
+   + A change in 1.10.2 accidentally broke ABI compatibility with 1.10.1
+     and earlier versions, causing programs compiled against 1.10.1 to
+     crash if linked with 1.10.2 at runtime. (Closes: #681066)
+   + Recent versions of OpenSSL include extra information in ECC private
+     keys, the presence of which caused an exception when such a key was
+     loaded by botan. The decoding of ECC private keys has been changed to
+     ignore these fields if they are set.
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 10 Jul 2012 21:03:03 +0200
+
+botan1.10 (1.10.2-1) unstable; urgency=low
+
+  * Imported Upstream version 1.10.2
+  * Remove s390x patch as it was merged upstream
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 28 Jun 2012 11:08:11 +0200
+
+botan1.10 (1.10.1-1) unstable; urgency=low
+
+  * Imported Upstream version 1.10.1
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 07 Feb 2012 20:03:56 +0100
+
+botan1.10 (1.10.0-3) unstable; urgency=low
+
+  * Don't canonicalize s390x to s390/s390 (Closes: #639564)
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 01 Sep 2011 09:45:13 +0200
+
+botan1.10 (1.10.0-2) unstable; urgency=low
+
+  * Rename manpage to botan-config-1.10 (Closes: #639264)
+
+ -- Ondřej Surý <ondrej@debian.org>  Thu, 25 Aug 2011 15:41:02 +0200
+
+botan1.10 (1.10.0-1) unstable; urgency=low
+
+  * Imported Upstream version 1.10.0
+  * Don't Conflict with libbotan1.8-dev, it's no longer needed
+  * Rename libbotan-1.9 to libbotan-1.10-0 to match its SONAME
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 21 Jun 2011 08:42:11 +0200
+
+botan1.10 (1.10~1.9.18-1) unstable; urgency=low
+
+  * Imported Upstream version 1.10~1.9.18
+    + Remove all local patches; merged upstream
+  * Update Vcs-* links
+  * Update *.install to reflect the versioning changes in upstream
+    + botan-config is now botan-config-<major>.<minor>
+    + headers are installed to /usr/include/botan-<major>.<minor>/botan
+    + pkg-config is botan-<major>.<minor>.pc
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 03 Jun 2011 16:23:16 +0200
+
+botan1.10 (1.10~1.9.17-1) unstable; urgency=low
+
+  * Fork botan1.8 package to botan1.10
+  * Imported Upstream version 1.9.17
+  * Fix spelling error recieved vs received in library
+  * Debian packaging:
+    + Bump standards version to 3.9.2
+    + Adjust patches to the new release
+    + Enable full build including the checks on all platforms
+    + Update install and docs files to the new release
+    + Rename library to libbotan-1.9.so to match SONAME
+    + Exclude duplicate license.txt file from package
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 10 May 2011 12:12:27 +0200
+
+botan1.8 (1.8.11-1) unstable; urgency=low
+
+  * Imported Upstream version 1.8.11
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 22 Dec 2010 11:56:33 +0100
+
+botan1.8 (1.8.9-2) unstable; urgency=low
+
+  * Add sh4 support (Closes: #594159)
+  * Bump standards version to 3.9.1
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 24 Aug 2010 09:30:33 +0200
+
+botan1.8 (1.8.9-1) unstable; urgency=low
+
+  * New upstream version
+  * Add git-buildpackage config
+  * Remove gmp_fix.patch; merged upstream
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 04 Aug 2010 16:59:58 +0200
+
+botan1.8 (1.8.8-5) unstable; urgency=low
+
+  * Add debian/watch file
+  * Disable tests on sparc as well
+
+ -- Ondřej Surý <ondrej@debian.org>  Sun, 18 Apr 2010 22:53:09 +0200
+
+botan1.8 (1.8.8-4) unstable; urgency=low
+
+  * Take ownership of the package; update maintainer
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 13 Apr 2010 12:15:57 +0200
+
+botan1.8 (1.8.8-3) unstable; urgency=low
+
+  * Skip tests, where we know they are broken
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 26 Mar 2010 19:48:02 +0100
+
+botan1.8 (1.8.8-2) unstable; urgency=low
+
+  * Convert to 3.0 (quilt) format
+  * Add upstream patch to fix gmp memory allocator segfault in softhsm
+
+ -- Ondřej Surý <ondrej@debian.org>  Sat, 23 Jan 2010 09:29:23 +0100
+
+botan1.8 (1.8.8-1) unstable; urgency=low
+
+  * New Upstream Version 1.8.8
+  * New Maintainer (Closes: #543832)
+  * Enable hardening-wrapper
+
+ -- Ondřej Surý <ondrej@debian.org>  Fri, 22 Jan 2010 10:22:34 +0100
+
+botan1.8 (1.8.6-2) unstable; urgency=low
+
+  * Removing vcs fields.
+  * Orphaning package.
+
+ -- Daniel Baumann <daniel@debian.org>  Thu, 27 Aug 2009 06:59:15 +0200
+
+botan1.8 (1.8.6-1) unstable; urgency=low
+
+  * Merging upstream version 1.8.6.
+  * Synchronising license text in copyright file with upstream.
+  * Removing ftbfs-mips.patch, was part of the new upstream release.
+  * Updating package to standards version 3.8.3.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 26 Aug 2009 16:11:46 +0200
+
+botan1.8 (1.8.5-5) unstable; urgency=low
+
+  * Adding patch from upstream to fix FTBFS on mips and mipsel.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 10 Aug 2009 09:06:50 +0200
+
+botan1.8 (1.8.5-4) unstable; urgency=low
+
+  * Setting --cpu configure flag by using deb host gnu cpu instead
+    (Closes: #540495).
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 08 Aug 2009 14:14:09 +0200
+
+botan1.8 (1.8.5-3) unstable; urgency=low
+
+  * Setting --cpu configure flag by using deb build arch (Closes:
+    #540013).
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 08 Aug 2009 10:33:58 +0200
+
+botan1.8 (1.8.5-2) unstable; urgency=low
+
+  * Only manually setting cpu flag on i386 (Closes: #539860).
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 04 Aug 2009 10:47:03 +0200
+
+botan1.8 (1.8.5-1) unstable; urgency=low
+
+  * Merging upstream version 1.8.5.
+  * Adding old changelog entries for separately uploaded botan packages
+    in the past.
+  * Using correct rfc-2822 date formats in changelog.
+  * Wrapping build depends.
+  * Adding misc depends.
+  * Renaming local manpages directory to common name.
+  * Minimizing rules file.
+  * Doing some minor cosmetical updates in the manpage.
+  * Updating copyright file to reflect changes of upstream version
+    1.8.0.
+  * Using new configure.py instread of configure.pl, updating necessary
+    things to cope with that.
+  * Updating.
+  * Tidy debhelper install files.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 04 Aug 2009 00:47:32 +0200
+
+botan1.8 (1.8.4-2) unstable; urgency=low
+
+  * Adding conflicts/replaces to libbotan1.8 (Closes: #537844).
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 21 Jul 2009 13:42:48 +0200
+
+botan1.8 (1.8.4-1) unstable; urgency=low
+
+  * Merging upstream version 1.8.4.
+  * Updating rules file to current state of the art.
+  * Using quilt rather than dpatch.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 14 Jul 2009 20:48:50 +0200
+
+botan1.8 (1.8.3-1) unstable; urgency=low
+
+  * Merging upstream version 1.8.3.
+  * Renaming source package to botan1.8 for consistency.
+  * Updating standards to 3.8.2.
+  * Renaming libbotan1.8 to libbotan-1.8.2 to match SONAME (Closes:
+    #527461).
+  * Updating section of the debug package.
+  * Updating year in copyright file.
+  * Removing botan1.8-dbg lintian overrides, not required anymore.
+  * Using correct rfc-2822 date formats in changelog.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 14 Jul 2009 11:31:24 +0200
+
+botan-devel (1.8.2-1) unstable; urgency=low
+
+  * Merging upstream version 1.8.2.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 04 May 2009 10:16:00 +0200
+
+botan-devel (1.8.1-1) unstable; urgency=low
+
+  * Merging upstream version 1.8.1.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 25 Jan 2009 01:50:00 +0100
+
+botan-devel (1.8.0-1) unstable; urgency=low
+
+  * Merging upstream version 1.8.0.
+  * Replacing 1.7 with 1.8 in all debhelper files.
+  * Correcting name of botan-config manpage.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 14 Dec 2008 20:54:00 +0100
+
+botan-devel (1.7.24-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.24.
+  * Removing info.txt and todo.txt from libbotan1.7-dev.docs, file not available
+    anymore.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 03 Dec 2008 09:48:00 +0100
+
+botan-devel (1.7.23-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.23.
+  * Rediffing cpuinfo.dpatch.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 25 Nov 2008 23:02:00 +0100
+
+botan-devel (1.7.22-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.22.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 22 Nov 2008 15:18:00 +0100
+
+botan-devel (1.7.21-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.21.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 15 Nov 2008 07:33:00 +0100
+
+botan-devel (1.7.20-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.20.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 15 Nov 2008 07:27:00 +0100
+
+botan-devel (1.7.19-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.19.
+  * Replacing obsolete dh_clean -k with dh_prep.
+  * Updating cpuinfo.dpatch.
+
+ -- Daniel Baumann <daniel@debian.org>  Fri, 07 Nov 2008 21:32:00 +0100
+
+botan-devel (1.7.18-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.18.
+  * Updating libbotan-1.7-dev debhelper install file to cover pkg-config file.
+  * Adding related libraries to depends of libbotan1.7-dev.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 26 Oct 2008 16:42:00 +0100
+
+botan-devel (1.7.17-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.17.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 26 Oct 2008 16:23:00 +0100
+
+botan-devel (1.7.16-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.16.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 12 Oct 2008 19:10:00 +0200
+
+botan-devel (1.7.15-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.15.
+  * Rediffing cpuinfo.dpatch.
+  * Updating rules to reflect upstreams Makefile changes.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 08 Oct 2008 20:32:00 +0200
+
+botan-devel (1.7.14-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.14.
+  * Removing no longer required --modules parameter to configure call.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 08 Oct 2008 19:40:00 +0200
+
+botan-devel (1.7.13-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.13.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 06 Oct 2008 21:27:00 +0200
+
+botan-devel (1.7.12-1) unstable; urgency=low
+
+  * Reverting previous temporary commit to make builds not fail when checks are
+    failed, now that all architectures are working.
+  * Using patch-stamp rather than patch in rules file.
+  * Merging upstream version 1.7.12.
+  * Removing bigint.dpatch, part of upstream version 1.7.12.
+  * Removing deref_alias.dpatch, went upstream.
+  * Rediffing cpuinfo.dpatch.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 20 Sep 2008 18:24:00 +0200
+
+botan-devel (1.7.11-2) unstable; urgency=low
+
+  * Adding patch from upstream to fix bigint bug.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 16 Sep 2008 08:52:00 +0200
+
+botan-devel (1.7.11-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.11.
+  * Rediffing cpuinfo.dpatch.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 14 Sep 2008 13:28:00 +0200
+
+botan-devel (1.7.10-3) unstable; urgency=low
+
+  * Temporarily not aborting when checks failing.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 14 Sep 2008 13:24:00 +0200
+
+botan-devel (1.7.10-2) unstable; urgency=medium
+
+  * Enabling checks.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 13 Sep 2008 17:17:00 +0200
+
+botan-devel (1.7.10-1) experimental; urgency=low
+
+  * Merging upstream version 1.7.10.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 10 Sep 2008 08:30:00 +0200
+
+botan-devel (1.7.9-1) experimental; urgency=low
+
+  * Merging upstream version 1.7.9.
+  * Rediffing 01-cpuinfo.dpatch.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 10 Sep 2008 08:01:00 +0200
+
+botan-devel (1.7.8-4) unstable; urgency=high
+
+  * Updating vcs fields in control file.
+  * Moving botan-config from libbotan1.7 to libbotan1.7-dev (Closes: #496529).
+  * Removing old conficts/replaces.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 08 Sep 2008 13:16:00 +0200
+
+botan-devel (1.7.8-3) unstable; urgency=medium
+
+  * Manually installing build.h into the package (Closes: #494658).
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 23 Aug 2008 16:48:00 +0200
+
+botan-devel (1.7.8-2) unstable; urgency=low
+
+  * Moving botan-config from libbotan1.7 to libbotan1.7-dev.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 03 Aug 2008 22:29:00 +0200
+
+botan-devel (1.7.8-1) unstable; urgency=low
+
+  * Adding patch to cleanup deref_alias removal.
+  * Merging upstream version 1.7.8.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 16 Jul 2008 10:22:00 +0200
+
+botan-devel (1.7.7-1) unstable; urgency=low
+
+  * Merging upstream version 1.7.7.
+  * Updating to standards 3.8.0.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 16 Jul 2008 00:03:00 +0200
+
+botan-devel (1.7.6-1) unstable; urgency=low
+
+  * Adding lintian overrides for botan-devel-dbg.
+  * Removing non existant partial changelog files from libbotan1.7.docs
+    file.
+  * Updating dh_installchangelogs call in rules file to match new name
+    of the changelog file.
+  * Rediffing 01-cpuinfo.dpatch.
+  * Merging upstream version 1.7.6.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 10 May 2008 20:57:00 +0200
+
+botan-devel (1.7.5-2) unstable; urgency=low
+
+  * Adding debug package.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 03 May 2008 09:06:00 +0200
+
+botan-devel (1.7.5-1) unstable; urgency=low
+
+  * Updating examples debhelper files to new upstream.
+  * Updating docs debhelper file to new upstream.
+  * Updating configure.pl call to new upstream version.
+  * Rediffing 01-cpuinfo.dpatch.
+  * Updating lintian overrides.
+  * Reordering rules file.
+  * Using lintian debhelper to install lintian overrides.
+  * Rewriting copyright file in machine-interpretable format.
+  * Adding vcs fields in control file.
+  * Upgrading package to debhelper 7.
+  * Merging upstream version 1.7.5.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 03 May 2008 08:42:00 +0200
+
+botan-devel (1.7.2-1) unstable; urgency=low
+
+  * Botan development release, upload as new botan-devel source package.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 12 Jan 2008 21:09:00 +0100
+
+botan (1.6.5-4) unstable; urgency=low
+
+  * Replacing obsolete dh_clean -k with dh_prep.
+  * Updating conflicts for botan 1.8 (Closes: #512347).
+  * Updating year in copyright file.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 20 Jan 2009 01:46:00 +0100
+
+botan (1.6.5-3) unstable; urgency=low
+
+  * Using patch-stamp rather than patch in rules file.
+  * Adding related libraries to depends of libbotan1.6-dev.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 26 Oct 2008 16:57:00 +0100
+
+botan (1.6.5-2) unstable; urgency=medium
+
+  * Enabling checks.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 13 Sep 2008 17:15:00 +0200
+
+botan (1.6.5-1) unstable; urgency=low
+
+  * Merging upstream version 1.6.5.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 10 Sep 2008 07:50:00 +0200
+
+botan (1.6.4-4) unstable; urgency=high
+
+  * Updating vcs fields in control file.
+  * Moving botan-config from libbotan1.6 to libbotan1.6-dev (Closes: #496529).
+  * Removing old conficts/replaces.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 08 Sep 2008 13:07:00 +0200
+
+botan (1.6.4-3) unstable; urgency=low
+
+  * Moving botan-config from libbotan1.6 to libbotan1.6-dev.
+  * Updating to standards 3.8.0.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 03 Aug 2008 22:27:00 +0200
+
+botan (1.6.4-2) unstable; urgency=low
+
+  * Adding debug package.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 03 May 2008 07:43:00 +0200
+
+botan (1.6.4-1) unstable; urgency=low
+
+  * Updating lintian overrides.
+  * Reordering rules file.
+  * Using lintian debhelper to install lintian overrides.
+  * Rewriting copyright file in machine-interpretable format.
+  * Adding vcs fields in control file.
+  * Upgrading package to debhelper 7.
+  * Merging upstream version 1.6.4.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 03 May 2008 07:31:00 +0200
+
+botan (1.6.3-4) unstable; urgency=low
+
+  * Botan is developed in a stable release branch and a development release
+    branch. In the past, I was uploading as 'versioned' source packages,
+    botan1.4 and botan1.5. To be a bit more consistent, the two source
+    packages will be named 'botan' and 'botan-devel' now.
+  * In preparation to the 'versioned' source packages, I'm renaming the
+    libbotan-dev to libbotan1.6-dev, and adding conflicts/replaces to
+    the libbotan1.7-dev (build from botan-devel).
+  * The whole transition doesn't influence any other package, currently
+    no package in Debian is depending (yet) on botan.
+  * Overwriting bogus lintian warning about GPL-vs.OpenSSL, only debian/*
+    is licensed under GPL.
+
+ -- Daniel Baumann <daniel@debian.org>  Sat, 12 Jan 2008 20:39:00 +0100
+
+botan (1.6.3-3) unstable; urgency=low
+
+  * Updated to new policy.
+  * Using homepage field in control.
+  * Added fail-missing to dh_install call in rules.
+  * Added simple manpage for botan-config.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 23 Dec 2007 11:43:00 +0100
+
+botan (1.6.3-2) unstable; urgency=low
+
+  * Compiling with -fpermissive (Closes: #431888).
+
+ -- Daniel Baumann <daniel@debian.org>  Thu, 11 Oct 2007 22:47:00 +0200
+
+botan (1.6.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * Dropping 02-includes; solved upstream.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 29 Jul 2007 20:31:00 +0200
+
+botan (1.6.2-3) unstable; urgency=low
+
+  * Fixed clean: target in rules (Closes: #424148).
+  * Removed old conflicts/replaces.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 15 May 2007 22:09:00 +0200
+
+botan (1.6.2-2) unstable; urgency=low
+
+  * Added patch from Martin Michlmayr <tbm@cyrius.com> to add missing include
+    required to build with GCC 4.3 (Closes: #417125).
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 01 Apr 2007 18:41:00 +0200
+
+botan (1.6.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 28 Mar 2007 22:09:00 +0200
+
+botan (1.6.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Daniel Baumann <daniel@debian.org>  Thu, 08 Feb 2007 13:22:00 +0100
+
+botan (1.6.0-2) unstable; urgency=low
+
+  * Minor cleanups.
+
+ -- Daniel Baumann <daniel@debian.org>  Fri, 19 Jan 2007 10:46:00 +0100
+
+botan (1.6.0-1) unstable; urgency=low
+
+  * New upstream release:
+    - botan 1.6.0 does replace both botan1.4 and botan1.5.
+
+ -- Daniel Baumann <daniel@debian.org>  Tue, 02 Jan 2007 00:01:00 +0100
+
+botan1.5 (1.5.13-3) unstable; urgency=low
+
+  * Using gcc-linux-generic for all archs/kernels, fixes FTBFS on mips.
+
+ -- Daniel Baumann <daniel@debian.org>  Thu, 14 Dec 2006 00:13:00 +0100
+
+botan1.5 (1.5.13-2) unstable; urgency=low
+
+  * Modified rules as suggested by Petr Salinger <Petr.Salinger@seznam.cz>
+    to make it build on kfreebsd (Closes: #402930).
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 13 Dec 2006 18:55:00 +0100
+
+botan1.5 (1.5.13-1) unstable; urgency=low
+
+  * New upstream release.
+  * Disabled cpu detection based on /proc/cpuinfo (Closes: #402073).
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 13 Dec 2006 11:04:00 +0200
+
+botan1.5 (1.5.11-1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 08 Oct 2006 14:43:00 +0200
+
+botan1.4 (1.4.12-4) unstable; urgency=low
+
+  * Using gcc-linux-generic for all archs/kernels, fixes FTBFS on mips.
+
+ -- Daniel Baumann <daniel@debian.org>  Thu, 14 Dec 2006 00:13:00 +0100
+
+botan1.4 (1.4.12-3) unstable; urgency=low
+
+  * Modified rules as suggested by Petr Salinger <Petr.Salinger@seznam.cz>
+    to make it build on kfreebsd (Closes: #402933).
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 13 Dec 2006 18:55:00 +0100
+
+botan1.4 (1.4.12-2) unstable; urgency=low
+
+  * Disabled cpu detection based on /proc/cpuinfo (Closes: #402071).
+
+ -- Daniel Baumann <daniel@debian.org>  Wed, 13 Dec 2006 11:04:00 +0200
+
+botan1.4 (1.4.12-1) unstable; urgency=low
+
+  * Initial release (Closes: #391770).
+
+ -- Daniel Baumann <daniel@debian.org>  Sun, 08 Oct 2006 14:43:00 +0200

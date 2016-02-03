@@ -1,0 +1,32 @@
+Description: Add support for arm64.
+Author: Adam Conrad <adconrad@ubuntu.com>
+
+--- /dev/null
++++ botan1.10/src/build-data/arch/aarch64.txt
+@@ -0,0 +1,6 @@
++endian little
++
++<aliases>
++arm64 # For Debian
++</aliases>
++
+--- botan1.10.orig/src/build-data/cc/gcc.txt
++++ botan1.10/src/build-data/cc/gcc.txt
+@@ -75,6 +75,7 @@ sh4         -> "-m4 -mieee"
+ 
+ alpha     -> "-mcpu=SUBMODEL" alpha-
+ arm       -> "-march=SUBMODEL"
++aarch64   -> "-mtune=generic"
+ superh    -> "-mSUBMODEL" sh
+ hppa      -> "-march=SUBMODEL" hppa
+ ia64      -> "-mtune=SUBMODEL"
+--- botan1.10.orig/src/math/mp/mp_asm64/info.txt
++++ botan1.10/src/math/mp/mp_asm64/info.txt
+@@ -8,6 +8,7 @@ mp_generic:mp_asmi.h
+ </header:internal>
+ 
+ <arch>
++aarch64
+ alpha
+ ia64
+ mips64

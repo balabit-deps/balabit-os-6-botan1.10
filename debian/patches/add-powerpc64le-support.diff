@@ -1,0 +1,88 @@
+Description: Add support for ppc64el.
+Author: Adam Conrad <adconrad@ubuntu.com>
+
+--- /dev/null
++++ botan1.10/src/build-data/arch/ppc64le.txt
+@@ -0,0 +1,21 @@
++endian little
++
++family ppc
++
++<aliases>
++powerpc64le
++ppc64el
++</aliases>
++
++<submodels>
++power7
++power7p
++power8
++power8e
++</submodels>
++
++# This should be enabled for all targets, but the Altivec code currently
++# makes lots of endian assumptions that I don't have the time to fix up:
++#<isa_extn>
++#altivec:all
++#</isa_extn>
+--- botan1.10.orig/src/build-data/cc/gcc.txt
++++ botan1.10/src/build-data/cc/gcc.txt
+@@ -84,6 +84,7 @@ mipsn32    -> "-mips3 -mcpu=SUBMODEL" mi
+ mips64    -> "-mips3 -mcpu=SUBMODEL" mips64-
+ ppc32     -> "-mcpu=SUBMODEL" ppc
+ ppc64     -> "-mcpu=SUBMODEL" ppc
++ppc64le   -> "-mcpu=power7 -mtune=power8" ppc
+ sparc32   -> "-mcpu=SUBMODEL -Wa,-xarch=v8plus" sparc32-
+ sparc64   -> "-mcpu=v9 -mtune=SUBMODEL"
+ x86_32    -> "-march=SUBMODEL -momit-leaf-frame-pointer"
+--- botan1.10.orig/src/math/mp/mp_asm64/info.txt
++++ botan1.10/src/math/mp/mp_asm64/info.txt
+@@ -12,6 +12,7 @@ alpha
+ ia64
+ mips64
+ ppc64
++ppc64le
+ sparc64
+ </arch>
+ 
+--- botan1.10.orig/src/build-data/arch/ppc64.txt
++++ botan1.10/src/build-data/arch/ppc64.txt
+@@ -17,6 +17,9 @@ power4
+ power5
+ power6
+ power7
++power7p
++power8
++power8e
+ cellppu
+ </submodels>
+ 
+@@ -25,5 +28,5 @@ cellbroadbandengine -> cellppu
+ </submodel_aliases>
+ 
+ <isa_extn>
+-altivec:cellppu,ppc970,power6,power7
++altivec:cellppu,ppc970,power6,power7,power7p,power8,power8e
+ </isa_extn>
+--- botan1.10.orig/src/utils/cpuid.cpp
++++ botan1.10/src/utils/cpuid.cpp
+@@ -157,6 +157,9 @@ bool altivec_check_pvr_emul()
+    const u16bit PVR_G5_970GX = 0x0045;
+    const u16bit PVR_POWER6   = 0x003E;
+    const u16bit PVR_POWER7   = 0x003F;
++   const u16bit PVR_POWER7p  = 0x004A;
++   const u16bit PVR_POWER8   = 0x004D;
++   const u16bit PVR_POWER8E  = 0x004B;
+    const u16bit PVR_CELL_PPU = 0x0070;
+ 
+    // Motorola produced G4s with PVR 0x800[0123C] (at least)
+@@ -177,6 +180,9 @@ bool altivec_check_pvr_emul()
+    altivec_capable |= (pvr == PVR_G5_970GX);
+    altivec_capable |= (pvr == PVR_POWER6);
+    altivec_capable |= (pvr == PVR_POWER7);
++   altivec_capable |= (pvr == PVR_POWER7p);
++   altivec_capable |= (pvr == PVR_POWER8);
++   altivec_capable |= (pvr == PVR_POWER8E);
+    altivec_capable |= (pvr == PVR_CELL_PPU);
+ #endif
+ 

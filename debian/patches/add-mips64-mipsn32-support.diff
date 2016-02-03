@@ -1,0 +1,46 @@
+--- /dev/null
++++ botan1.10/src/build-data/arch/mipsn32.txt
+@@ -0,0 +1,22 @@
++<aliases>
++mipsn32el # For Debian
++</aliases>
++
++<submodels>
++r4000
++r4100
++r4300
++r4400
++r4600
++r4560
++r5000
++r8000
++r10000
++</submodels>
++
++<submodel_aliases>
++r4k -> r4000
++r5k -> r5000
++r8k -> r8000
++r10k -> r10000
++</submodel_aliases>
+--- botan1.10.orig/src/build-data/cc/clang.txt
++++ botan1.10/src/build-data/cc/clang.txt
+@@ -39,6 +39,8 @@ westmere  -> "-march=corei7 -maes"
+ 
+ <mach_abi_linking>
+ x86_64  -> "-m64"
++mips32  -> "-mabi=32"
++mipsn32  -> "-mabi=n32"
+ mips64  -> "-mabi=64"
+ s390    -> "-m31"
+ s390x   -> "-m64"
+--- botan1.10.orig/src/build-data/cc/gcc.txt
++++ botan1.10/src/build-data/cc/gcc.txt
+@@ -80,6 +80,7 @@ hppa      -> "-march=SUBMODEL" hppa
+ ia64      -> "-mtune=SUBMODEL"
+ m68k      -> "-mSUBMODEL"
+ mips32    -> "-mips1 -mcpu=SUBMODEL" mips32-
++mipsn32    -> "-mips3 -mcpu=SUBMODEL" mips64-
+ mips64    -> "-mips3 -mcpu=SUBMODEL" mips64-
+ ppc32     -> "-mcpu=SUBMODEL" ppc
+ ppc64     -> "-mcpu=SUBMODEL" ppc

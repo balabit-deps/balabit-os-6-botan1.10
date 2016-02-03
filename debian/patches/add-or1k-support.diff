@@ -1,0 +1,7 @@
+--- /dev/null
++++ botan1.10/src/build-data/arch/or1k.txt
+@@ -0,0 +1,4 @@
++endian big
++<submodels>
++or1k
++</submodels>
