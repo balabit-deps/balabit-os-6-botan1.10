@@ -180,12 +180,12 @@ void do_x509_tests(RandomNumberGenerator& rng)
    std::cout << '.' << std::flush;
    X509_Certificate user1_cert =
       ca.sign_request(user1_req, rng,
-                      X509_Time("2008-01-01"), X509_Time("2100-01-01"));
+                      X509_Time("2008-01-01"), X509_Time("9999-12-31"));
 
    std::cout << '.' << std::flush;
    X509_Certificate user2_cert = ca.sign_request(user2_req, rng,
                                                  X509_Time("2008-01-01"),
-                                                 X509_Time("2100-01-01"));
+                                                 X509_Time("9999-12-31"));
    std::cout << '.' << std::flush;
 
    X509_CRL crl1 = ca.new_crl(rng);
@@ -245,4 +245,3 @@ void do_x509_tests(RandomNumberGenerator&)
    }
 
 #endif
-

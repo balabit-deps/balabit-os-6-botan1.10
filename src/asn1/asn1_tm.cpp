@@ -233,7 +233,7 @@ std::string X509_Time::readable_string() const
 */
 bool X509_Time::passes_sanity_check() const
    {
-   if(year < 1950 || year > 2100)
+   if(year < 1950 || year > 9999)
       return false;
    if(month == 0 || month > 12)
       return false;
